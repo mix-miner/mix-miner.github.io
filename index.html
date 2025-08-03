@@ -1,41 +1,36 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mix Miner Dropshipping Otomasyonu</title>
+    <title>Mix Miner Lisans Gönderim Paneli</title>
     <style>
-        body {
-            background-color: #1c1c1c;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #00ffe0;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-        }
-        .box {
-            background-color: #2e2e2e;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-        }
+        body { font-family: Arial, sans-serif; background: #f5f7fa; color: #333; padding: 20px; }
+        h1 { color: #2c3e50; }
+        form { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        label { display: block; margin-bottom: 8px; margin-top: 16px; }
+        input[type="text"], select { width: 100%; padding: 8px; margin-bottom: 10px; }
+        button { background: #2980b9; color: #fff; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #3498db; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Mix Miner Dropshipping Otomasyonu</h1>
-        <div class="box">
-            <p>Bu sayfa demo bir tanıtım sayfasıdır.</p>
-            <p>Amazon to Amazon dropshipping sistemiyle çalışır.</p>
-            <p>Tablet ve mobil uyumlu olarak tasarlanmıştır.</p>
-        </div>
-    </div>
+    <h1>Mix Miner Lisans Gönderim Paneli</h1>
+    <form>
+        <label for="email">Kullanıcı E-posta Adresi</label>
+        <input type="text" id="email" name="email" placeholder="ornek@mail.com">
+
+        <label for="lisans_suresi">Lisans Süresi</label>
+        <select id="lisans_suresi" name="lisans_suresi">
+            <option value="10gun">10 Günlük Deneme</option>
+            <option value="1ay">1 Aylık</option>
+            <option value="3ay">3 Aylık</option>
+            <option value="6ay">6 Aylık</option>
+            <option value="1yil">1 Yıllık</option>
+        </select>
+
+        <button type="submit">Lisans Anahtarı Gönder</button>
+    </form>
 </body>
 </html>
