@@ -1,0 +1,1 @@
+<?php // PHP mail script ?>
