@@ -1,0 +1,1 @@
+<?php // PHPMailer class placeholder ?>
