@@ -1,0 +1,1 @@
+<?php // Exception class placeholder ?>
