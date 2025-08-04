@@ -1,0 +1,166 @@
+from zipfile import ZipFile
+import os
+
+# Klasör yapısını oluşturuyoruz
+base_dir = "/mnt/data/mixminer_license_sender"
+os.makedirs(base_dir, exist_ok=True)
+
+# HTML dosyası
+html_content = """
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lisans Anahtarı Oluştur</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <img src="logo.jpg" alt="Mix Miner Logo" class="logo" />
+    <h1>Lisans Gönderimi</h1>
+    <p>Shopier'den gelen e-postaya lisans anahtarı gönder</p>
+  </header>
+
+  <main class="features">
+    <form action="send.php" method="POST">
+      <label for="email">E-posta adresi:</label><br />
+      <input type="email" name="email" required /><br /><br />
+
+      <label for="duration">Süre Seçimi:</label><br />
+      <select name="duration">
+        <option value="10 gün">Demo (10 gün)</option>
+        <option value="1 ay">1 Aylık</option>
+        <option value="3 ay">3 Aylık</option>
+        <option value="6 ay">6 Aylık</option>
+        <option value="1 yıl">Yıllık</option>
+      </select><br /><br />
+
+      <button type="submit" class="button">Anahtar Oluştur ve Gönder</button>
+    </form>
+    <p id="resultMessage"><?php echo $_GET['msg'] ?? ""; ?></p>
+  </main>
+</body>
+</html>
+"""
+with open(f"{base_dir}/index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+# CSS dosyası
+css_content = """
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.features {
+  margin-top: 30px;
+}
+
+form {
+  display: inline-block;
+  text-align: left;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+"""
+with open(f"{base_dir}/styles.css", "w", encoding="utf-8") as f:
+    f.write(css_content)
+
+# PHP dosyası
+php_content = """
+<?php
+use PHPMailer\\PHPMailer\\PHPMailer;
+use PHPMailer\\PHPMailer\\Exception;
+
+require 'phpmailer/Exception.php';
+require 'phpmailer/PHPMailer.php';
+require 'phpmailer/SMTP.php';
+
+$email = $_POST['email'] ?? '';
+$duration = $_POST['duration'] ?? '';
+
+if (!$email || !$duration) {
+    header("Location: index.html?msg=Geçersiz istek.");
+    exit;
+}
+
+$key = strtoupper(substr(md5(uniqid()), 0, 4) . '-' . substr(md5(uniqid()), 4, 4) . '-' . substr(md5(uniqid()), 8, 4));
+
+$mail = new PHPMailer(true);
+
+try {
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'electromercadoshopier@gmail.com';
+    $mail->Password = 'wgjq krbj urcm nrnu';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+
+    $mail->setFrom('electromercadoshopier@gmail.com', 'Mix Miner');
+    $mail->addAddress($email);
+    $mail->isHTML(true);
+    $mail->Subject = 'Mix Miner Lisans Anahtarınız';
+    $mail->Body    = '<h3>Mix Miner Lisans Anahtarınız:</h3><p><b>' . $key . '</b><br>Süre: ' . $duration . '</p>';
+
+    $mail->send();
+    header("Location: index.html?msg=Anahtar başarıyla gönderildi.");
+} catch (Exception $e) {
+    header("Location: index.html?msg=Mail gönderilemedi. Hata: {$mail->ErrorInfo}");
+}
+?>
+"""
+with open(f"{base_dir}/send.php", "w", encoding="utf-8") as f:
+    f.write(php_content)
+
+# PHPMailer klasörünü oluştur ve yerleştirilecek dosyalar (boş örnek)
+phpmailer_dir = os.path.join(base_dir, "phpmailer")
+os.makedirs(phpmailer_dir, exist_ok=True)
+with open(os.path.join(phpmailer_dir, "PHPMailer.php"), "w") as f:
+    f.write("<?php // PHPMailer class placeholder ?>")
+with open(os.path.join(phpmailer_dir, "SMTP.php"), "w") as f:
+    f.write("<?php // SMTP class placeholder ?>")
+with open(os.path.join(phpmailer_dir, "Exception.php"), "w") as f:
+    f.write("<?php // Exception class placeholder ?>")
+
+# Logo örnek görseli
+logo_path = f"{base_dir}/logo.jpg"
+with open(logo_path, "wb") as f:
+    f.write(b"\xff\xd8\xff\xe0" + b"DummyJPEG")  # Dummy JPG content
+
+# Zip dosyasını oluştur
+zip_path = "/mnt/data/mixminer_lisans_paneli.zip"
+with ZipFile(zip_path, "w") as zipf:
+    for foldername, subfolders, filenames in os.walk(base_dir):
+        for filename in filenames:
+            file_path = os.path.join(foldername, filename)
+            arcname = os.path.relpath(file_path, base_dir)
+            zipf.write(file_path, arcname)
+
+zip_path
