@@ -4,33 +4,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lisans Anahtarı Oluştur</title>
+  <title>Mix Miner - Ana Sayfa</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <img src="logo.jpg" alt="Mix Miner Logo" class="logo" />
-    <h1>Lisans Gönderimi</h1>
-    <p>Shopier'den gelen e-postaya lisans anahtarı gönder</p>
+    <img src="assets/logo.jpg" alt="Mix Miner Logo" class="logo" />
+    <h1>Mix Miner</h1>
+    <p>Yeni nesil GPU madencilik yazılımı</p>
   </header>
 
-  <main class="features">
-    <form action="send.php" method="POST">
-      <label for="email">E-posta adresi:</label><br />
-      <input type="email" name="email" required /><br /><br />
+  <main>
+    <section class="features">
+      <h2>Özellikler</h2>
+      <ul>
+        <li>Tüm GPU sistemlerle uyumlu</li>
+        <li>10 günlük demo</li>
+        <li>Shopier ile hızlı lisans</li>
+        <li>Otomatik kazanç raporu</li>
+        <li>Başlangıç cüzdan yönlendirmesi</li>
+      </ul>
+    </section>
 
-      <label for="duration">Süre Seçimi:</label><br />
-      <select name="duration">
-        <option value="10 gün">Demo (10 gün)</option>
-        <option value="1 ay">1 Aylık</option>
-        <option value="3 ay">3 Aylık</option>
-        <option value="6 ay">6 Aylık</option>
-        <option value="1 yıl">Yıllık</option>
-      </select><br /><br />
-
-      <button type="submit" class="button">Anahtar Oluştur ve Gönder</button>
-    </form>
-    <p id="resultMessage"><?php echo $_GET['msg'] ?? ""; ?></p>
+    <section class="actions">
+      <a href="https://www.dropbox.com/scl/fi/yl6fpoyukg0p06p9rdsmp/Mix-Miner-Demo.zip?rlkey=it4htbo3d6pf0cgb15cv8a4pj&dl=1" class="button">Demo Sürümü İndir</a>
+      <a href="https://shopier.com/mixminer" class="button">Lisans Satın Al</a>
+      <a href="panel.html" class="button">Lisans Anahtarı Oluştur</a>
+    </section>
   </main>
+
+  <footer>
+    <p>© 2025 Mix Miner</p>
+  </footer>
 </body>
 </html>
