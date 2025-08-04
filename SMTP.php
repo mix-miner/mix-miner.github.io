@@ -1,1 +1,0 @@
-<?php // SMTP class placeholder ?>
