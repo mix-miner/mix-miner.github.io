@@ -20,7 +20,7 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'electromercadoshopier@gmail.com';
-    $mail->Password = 'wgjqkrbjurcmnrnu';
+    $mail->Password = 'Qm590suha@';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->setFrom('electromercadoshopier@gmail.com', 'Mix Miner');
