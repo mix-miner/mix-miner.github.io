@@ -21,6 +21,7 @@ try {
     $mail->SMTPAuth = true;
     $mail->Username = 'electromercadoshopier@gmail.com';
     $mail->Password = 'Qm590suha@';
+    $mail->Password = 'wgjqkrbjurcmnrnu';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->setFrom('electromercadoshopier@gmail.com', 'Mix Miner');
